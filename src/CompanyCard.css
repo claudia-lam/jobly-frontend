@@ -2,3 +2,12 @@
   border: 1px solid black;
   height: 200px;
 }
+
+.CompanyCard-Link {
+  text-decoration: none;
+  color: inherit;
+}
+
+.CompanyCard-Link:hover {
+  color: blue;
+}

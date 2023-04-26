@@ -1,5 +1,5 @@
-import './CompanyCard.css';
-
+import "./CompanyCard.css";
+import { Link } from "react-router-dom";
 
 /** Individual card element for a company
  *
@@ -12,16 +12,17 @@ import './CompanyCard.css';
  * App --> RoutesList --> CompanyList --> CompanyCard
  */
 function CompanyCard({ company }) {
-  const { name, description, logoUrl } = company;
+  const { name, handle, description, logoUrl } = company;
 
   return (
-    <div className='CompanyCard'>
-      {logoUrl && <img src={`.${logoUrl}`} alt={`logo of ${name}`} />}
-      <h3>{name}</h3>
-      <p>{description}</p>
-    </div>
+    <Link className="CompanyCard-Link" to={`/companies/${handle}`}>
+      <div className="CompanyCard">
+        {logoUrl && <img src={`.${logoUrl}`} alt={`logo of ${name}`} />}
+        <h3>{name}</h3>
+        <p>{description}</p>
+      </div>
+    </Link>
   );
 }
-
 
 export default CompanyCard;
