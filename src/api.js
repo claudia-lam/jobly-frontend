@@ -66,3 +66,5 @@ class JoblyApi {
     return res;
   }
 }
+
+export default JoblyApi;
