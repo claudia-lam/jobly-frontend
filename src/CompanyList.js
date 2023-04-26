@@ -1,6 +1,8 @@
 import { useState, useEffect } from "react";
 import JoblyApi from "./api";
 import CompanyCard from "./CompanyCard";
+import SearchForm from './SearchForm';
+
 
 /** List of all companies
  *
@@ -40,17 +42,35 @@ function CompanyList() {
     fetchCompanies();
   }, []);
 
+
+  /**  */
+  async function filterCompanies(searchTerm) {
+    try {
+      const companies = await JoblyApi.getFilteredCompanies(searchTerm);
+      setCompanies({
+        data: companies,
+        isLoading: false,
+        errors: null
+      });
+    } catch (err) {
+      setCompanies({
+        data: null,
+        isLoading: false,
+        errors: err
+      });
+    }
+  }
+
   const { isLoading, errors } = companies;
 
   if (isLoading) return <p>Loading...</p>;
   if (errors) return <p>Errors: {errors}</p>;
 
-  console.log("companies", companies);
-
   const companiesData = companies.data.companies;
 
   return (
-    <div>
+    <div className='CompanyList'>
+      <SearchForm filter={filterCompanies} />
       {companiesData.map((c) => {
         return <CompanyCard company={c} key={c.handle} />;
       })}

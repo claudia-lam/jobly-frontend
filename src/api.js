@@ -52,12 +52,12 @@ class JoblyApi {
     return res;
   }
 
-  // /** Get details on a job by id. */
+  /** Get list of filtered companies */
 
-  // static async getJob(id) {
-  //   let res = await this.request(`jobs/${id}`);
-  //   return res.job;
-  // }
+  static async getFilteredCompanies(searchTerm) {
+    let res = await this.request(`companies/?nameLike=${searchTerm}`);
+    return res;
+  }
 
   /** Get list of all jobs*/
 
