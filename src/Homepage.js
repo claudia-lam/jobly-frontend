@@ -1,4 +1,3 @@
-
 /** Homepage
  *
  * Props: none
@@ -8,8 +7,7 @@
  * App --> RoutesList --> Homepage
  */
 function Homepage() {
-  return <p>Welcome!</p>
+  return <p>Welcome!</p>;
 }
-
 
 export default Homepage;

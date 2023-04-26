@@ -1,18 +1,22 @@
 import "./App.css";
 import { BrowserRouter } from "react-router-dom";
 import RoutesList from "./RoutesList";
-// import Nav from './Nav';
+import Nav from "./Nav";
 
-
-/**
+/** Controls the entire app
  *
+ * Props: none
+ *
+ * State: none
+ *
+ * App -> [Nav, RoutesList]
  *
  */
 function App() {
   return (
     <div className="App">
       <BrowserRouter>
-        {/* <Nav /> */}
+        <Nav />
         <RoutesList />
       </BrowserRouter>
     </div>
