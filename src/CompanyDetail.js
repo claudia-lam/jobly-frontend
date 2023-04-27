@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import JoblyApi from "./api";
+import JobCardList from './JobCardList';
+
 
 /** Detail about a company
  *
@@ -19,7 +21,6 @@ import JoblyApi from "./api";
  */
 function CompanyDetail() {
   const { company } = useParams();
-  console.log("companyHandle-in CO DETAILS", company);
 
   const [companyData, setCompanyData] = useState({
     data: null,
@@ -27,15 +28,14 @@ function CompanyDetail() {
     errors: null,
   });
 
-  console.log("companyData - CO DETAILS", companyData);
-
   useEffect(
     function getCompanyWhenMount() {
       async function getCompany() {
         try {
-          const c = await JoblyApi.getCompany(company);
+          const res = await JoblyApi.getCompany(company);
+
           setCompanyData({
-            data: c,
+            data: res,
             isLoading: false,
             errors: null,
           });
@@ -52,7 +52,22 @@ function CompanyDetail() {
     [company]
   );
 
-  return <p>Company detail</p>;
+
+  const { isLoading, errors } = companyData;
+
+  if (isLoading) return <p>Loading...</p>;
+  if (errors) return <p>Errors: {errors}</p>;
+
+  const { name, description } = companyData.data;
+
+  return (
+    <div className='CompanyDetail'>
+      <h2>{name}</h2>
+      <p>{description}</p>
+      <JobCardList jobs={companyData.data.jobs} />
+    </div>
+  );
 }
+
 
 export default CompanyDetail;
