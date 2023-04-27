@@ -1,9 +1,10 @@
 import { useState } from "react";
 
+
 /** Search Form
  *
  * Props:
- *  -
+ *  - filter: parent function to call
  *
  * State:
  *  - searchTerm: user input
@@ -28,7 +29,6 @@ function SearchForm({ filter }) {
   return (
     <form className="SearchForm" onSubmit={handleSubmit}>
       <input
-        className="SearchForm-input"
         name="search"
         placeholder="Enter search term"
         onChange={handleChange}
@@ -38,5 +38,6 @@ function SearchForm({ filter }) {
     </form>
   );
 }
+
 
 export default SearchForm;

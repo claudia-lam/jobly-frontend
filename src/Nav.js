@@ -10,7 +10,7 @@ import { Link } from "react-router-dom";
  * App -> Nav
  *
  */
-function Nav() {
+function Nav() {    // TODO: NavLink better for styling
   return (
     <div className="Nav">
       <Link to="/">Jobly</Link>

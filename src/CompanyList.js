@@ -3,17 +3,21 @@ import JoblyApi from "./api";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
 
+
+let ALL_COMPANIES = null;
+// TODO: make another API call to get all companies instead of using a global var.
 /** List of all companies
  *
- * Props: none
+ * Props:
+ *  - none
  *
  * State:
- *    - companies: Object containing the keys data,
- *                 isLoading and errors
-
- *        {data: [{c1},...],
- *        isLoading: bool,
- *        errors: null}
+ *  - companies: Object containing the keys data,
+ *               isLoading and errors
+ *
+ *       {data: [{c1},...],
+ *       isLoading: bool,
+ *       errors: null}
  *
  *
  * App --> RoutesList --> CompanyList --> [SearchForm, CompanyCard]
@@ -29,7 +33,12 @@ function CompanyList() {
     async function fetchCompanies() {
       try {
         const companies = await JoblyApi.getCompanies();
-        setCompanies({ data: companies, isLoading: false, errors: null });
+        setCompanies({
+          data: companies,
+          isLoading: false,
+          errors: null
+        });
+        ALL_COMPANIES = companies;  // FIXME:
       } catch (err) {
         setCompanies({
           data: null,
@@ -45,24 +54,34 @@ function CompanyList() {
    *
    * takes in search term: "abc"
    *
+   * if no search term, state is set to full company list
+   *
    * sets the state of the companies or sets state to errors
-   *
-   *
    */
   async function filterCompanies(searchTerm) {
-    try {
-      const companies = await JoblyApi.getFilteredCompanies(searchTerm);
+    if (!searchTerm.trim()) {
+      // TODO: make API call to get all companies, no global variable necessary
       setCompanies({
-        data: companies,
+        data: ALL_COMPANIES,
         isLoading: false,
         errors: null,
       });
-    } catch (err) {
-      setCompanies({
-        data: null,
-        isLoading: false,
-        errors: err,
-      });
+    } else {
+      try {
+        const filteredCompanies = await JoblyApi.getFilteredCompanies(searchTerm);
+
+        setCompanies({
+          data: filteredCompanies,
+          isLoading: false,
+          errors: null,
+        });
+      } catch (err) {
+        setCompanies({
+          data: null,
+          isLoading: false,
+          errors: err,
+        });
+      }
     }
   }
 
@@ -73,16 +92,16 @@ function CompanyList() {
 
   const companiesData = companies.data.companies;
 
-  console.log("companies", companies);
   return (
     <div className="CompanyList">
       <SearchForm filter={filterCompanies} />
-      {companiesData.length === 0 && <p>Sorry, no results were found!</p>}
+      {!companiesData.length && <p>Sorry, no results were found!</p>}
       {companiesData.map((c) => {
-        return <CompanyCard company={c} key={c.handle} />;
+        return <CompanyCard company={c} key={c.handle} />;  // TODO: be more explicit of what you're passing down as props.
       })}
     </div>
   );
 }
+
 
 export default CompanyList;

@@ -1,13 +1,15 @@
 import "./CompanyCard.css";
 import { Link } from "react-router-dom";
 
-/** Individual card element for a company
+
+/** Individual card for a company
  *
  * Props:
- *  - company: company object -
+ *  - company: company object
  *             { handle, name, description, numEmployees, logoUrl }
  *
- * State: none
+ * State:
+ *  - none
  *
  * App --> RoutesList --> CompanyList --> CompanyCard
  */
@@ -24,5 +26,6 @@ function CompanyCard({ company }) {
     </Link>
   );
 }
+
 
 export default CompanyCard;

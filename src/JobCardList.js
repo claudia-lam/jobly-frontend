@@ -1,10 +1,12 @@
 import JobCard from "./JobCard";
 
+
 /** List of jobs
  *
  * Props:
- *  - jobs: jobs object
- *  {description, handle, jobs:[...], logoUrl, name, numEmployees}
+ *  - jobs: array of job objects
+ *
+ *    [ {id, title, salary, equity}, ... ]
  *
  * State:
  *  - none
@@ -20,5 +22,6 @@ function JobCardList({ jobs }) {
     </div>
   );
 }
+
 
 export default JobCardList;

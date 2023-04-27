@@ -3,18 +3,23 @@ import JoblyApi from "./api";
 import JobCardList from "./JobCardList";
 import SearchForm from "./SearchForm";
 
+
+let ALL_JOBS = null;
+// TODO: no global var necessary, do same thing as in companylist.
 /** List of all jobs
  *
- * Props: none
+ * Props:
+ *  - none
  *
  * State:
- * - jobs: array of objects containing the keys data,
- *             isLoading and errors
- *      [
- *        {data: [{j1},...],
- *        isLoading: bool,
- *        errors: null}
- *      ]
+ * - jobs: object containing jobs data,
+ *           isLoading and errors
+ *
+ *        {
+ *          data: [{j1},...],
+ *          isLoading: bool,
+ *          errors: null
+ *        }
  *
  * App --> RoutesList --> JobList --> [SearchForm, JobCardList]
  */
@@ -25,8 +30,6 @@ function JobList() {
     errors: false,
   });
 
-  console.log("jobs - in JobList", jobs);
-
   useEffect(function getJobsWhenMounted() {
     async function getJobs() {
       try {
@@ -36,7 +39,7 @@ function JobList() {
           isLoading: false,
           errors: false,
         });
-        console.log("res", res);
+        ALL_JOBS = res;
       } catch (err) {
         setJobs({
           data: null,
@@ -49,34 +52,45 @@ function JobList() {
   }, []);
 
   async function getFilteredJobs(searchTerm) {
-    try {
-      const res = await JoblyApi.getFilteredJobs(searchTerm);
+    if (!searchTerm.trim()) {  // FIXME: make api call to get all jobs
       setJobs({
-        data: res,
+        data: ALL_JOBS,
         isLoading: false,
         errors: false,
       });
-      console.log("res", res);
-    } catch (err) {
-      setJobs({
-        data: null,
-        isLoading: true,
-        errors: err,
-      });
+    } else {
+      try {
+        const res = await JoblyApi.getFilteredJobs(searchTerm);
+        setJobs({
+          data: res,
+          isLoading: false,
+          errors: false,
+        });
+      } catch (err) {
+        setJobs({
+          data: null,
+          isLoading: false,
+          errors: err,
+        });
+      }
     }
   }
 
   const { isLoading, errors } = jobs;
+
   if (isLoading) return <p>Loading...</p>;
   if (errors) return <p>Errors: {errors}</p>;
+
+  const allJobs = jobs.data.jobs
 
   return (
     <div className="JobList">
       <SearchForm filter={getFilteredJobs} />
-      {jobs.data.jobs.length === 0 && <p>Sorry, no results were found!</p>}
-      <JobCardList jobs={jobs.data.jobs} />
+      {!allJobs.length && <p>Sorry, no results were found!</p>}
+      <JobCardList jobs={allJobs} />
     </div>
   );
 }
+
 
 export default JobList;

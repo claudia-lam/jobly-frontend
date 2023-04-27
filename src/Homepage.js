@@ -7,7 +7,12 @@
  * App --> RoutesList --> Homepage
  */
 function Homepage() {
-  return <p>Welcome!</p>;
+  return (
+    <div className='Homepage'>
+      <h3>Jobly</h3>
+      <p>All the jobs in one, convenient place.</p>
+    </div>
+  )
 }
 
 export default Homepage;

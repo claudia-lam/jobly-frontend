@@ -6,16 +6,16 @@ import JobCardList from './JobCardList';
 
 /** Detail about a company
  *
- * Props: none
+ * Props:
+ *  - none
  *
  * State:
- *   - company: an object containing the keys data,
+ *   - company: an object containing company data,
  *                 isLoading and errors
  *
  *        {data: {c1},
  *        isLoading: bool,
  *        errors: null}
- *
  *
  * App --> RoutesList --> CompanyDetail --> JobCardList
  */
@@ -29,7 +29,7 @@ function CompanyDetail() {
   });
 
   useEffect(
-    function getCompanyWhenMount() {
+    function getCompanyWhenMount() {  // TODO: function name change. Not on mount anymore.
       async function getCompany() {
         try {
           const res = await JoblyApi.getCompany(company);
@@ -42,7 +42,7 @@ function CompanyDetail() {
         } catch (err) {
           setCompanyData({
             data: null,
-            isLoading: true,
+            isLoading: false,
             errors: err,
           });
         }
@@ -56,15 +56,15 @@ function CompanyDetail() {
   const { isLoading, errors } = companyData;
 
   if (isLoading) return <p>Loading...</p>;
-  if (errors) return <p>Errors: {errors}</p>;
+  if (errors) return <p>Errors: {errors}</p>;   // TODO: display error page instead of showing error
 
-  const { name, description } = companyData.data;
+  const { name, description, jobs } = companyData.data;
 
   return (
     <div className='CompanyDetail'>
       <h2>{name}</h2>
       <p>{description}</p>
-      <JobCardList jobs={companyData.data.jobs} />
+      <JobCardList jobs={jobs} />
     </div>
   );
 }
