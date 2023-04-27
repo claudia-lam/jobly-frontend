@@ -3,9 +3,6 @@ import JoblyApi from "./api";
 import CompanyCard from "./CompanyCard";
 import SearchForm from "./SearchForm";
 
-
-let ALL_COMPANIES = null;
-// TODO: make another API call to get all companies instead of using a global var.
 /** List of all companies
  *
  * Props:
@@ -36,9 +33,8 @@ function CompanyList() {
         setCompanies({
           data: companies,
           isLoading: false,
-          errors: null
+          errors: null,
         });
-        ALL_COMPANIES = companies;  // FIXME:
       } catch (err) {
         setCompanies({
           data: null,
@@ -60,15 +56,17 @@ function CompanyList() {
    */
   async function filterCompanies(searchTerm) {
     if (!searchTerm.trim()) {
-      // TODO: make API call to get all companies, no global variable necessary
+      const allCompanies = await JoblyApi.getCompanies();
       setCompanies({
-        data: ALL_COMPANIES,
+        data: allCompanies,
         isLoading: false,
         errors: null,
       });
     } else {
       try {
-        const filteredCompanies = await JoblyApi.getFilteredCompanies(searchTerm);
+        const filteredCompanies = await JoblyApi.getFilteredCompanies(
+          searchTerm
+        );
 
         setCompanies({
           data: filteredCompanies,
@@ -97,11 +95,10 @@ function CompanyList() {
       <SearchForm filter={filterCompanies} />
       {!companiesData.length && <p>Sorry, no results were found!</p>}
       {companiesData.map((c) => {
-        return <CompanyCard company={c} key={c.handle} />;  // TODO: be more explicit of what you're passing down as props.
+        return <CompanyCard company={c} key={c.handle} />; // TODO: be more explicit of what you're passing down as props.
       })}
     </div>
   );
 }
-
 
 export default CompanyList;

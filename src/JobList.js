@@ -3,9 +3,6 @@ import JoblyApi from "./api";
 import JobCardList from "./JobCardList";
 import SearchForm from "./SearchForm";
 
-
-let ALL_JOBS = null;
-// TODO: no global var necessary, do same thing as in companylist.
 /** List of all jobs
  *
  * Props:
@@ -39,7 +36,6 @@ function JobList() {
           isLoading: false,
           errors: false,
         });
-        ALL_JOBS = res;
       } catch (err) {
         setJobs({
           data: null,
@@ -52,9 +48,10 @@ function JobList() {
   }, []);
 
   async function getFilteredJobs(searchTerm) {
-    if (!searchTerm.trim()) {  // FIXME: make api call to get all jobs
+    if (!searchTerm.trim()) {
+      const res = await JoblyApi.getJobs();
       setJobs({
-        data: ALL_JOBS,
+        data: res,
         isLoading: false,
         errors: false,
       });
@@ -81,7 +78,7 @@ function JobList() {
   if (isLoading) return <p>Loading...</p>;
   if (errors) return <p>Errors: {errors}</p>;
 
-  const allJobs = jobs.data.jobs
+  const allJobs = jobs.data.jobs;
 
   return (
     <div className="JobList">
@@ -91,6 +88,5 @@ function JobList() {
     </div>
   );
 }
-
 
 export default JobList;

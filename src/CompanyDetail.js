@@ -1,8 +1,7 @@
 import { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import JoblyApi from "./api";
-import JobCardList from './JobCardList';
-
+import JobCardList from "./JobCardList";
 
 /** Detail about a company
  *
@@ -29,7 +28,7 @@ function CompanyDetail() {
   });
 
   useEffect(
-    function getCompanyWhenMount() {  // TODO: function name change. Not on mount anymore.
+    function getCompanyOnChange() {
       async function getCompany() {
         try {
           const res = await JoblyApi.getCompany(company);
@@ -52,22 +51,20 @@ function CompanyDetail() {
     [company]
   );
 
-
   const { isLoading, errors } = companyData;
 
   if (isLoading) return <p>Loading...</p>;
-  if (errors) return <p>Errors: {errors}</p>;   // TODO: display error page instead of showing error
+  if (errors) return <p>Errors: {errors}</p>; // TODO: display error page instead of showing error
 
   const { name, description, jobs } = companyData.data;
 
   return (
-    <div className='CompanyDetail'>
+    <div className="CompanyDetail">
       <h2>{name}</h2>
       <p>{description}</p>
       <JobCardList jobs={jobs} />
     </div>
   );
 }
-
 
 export default CompanyDetail;

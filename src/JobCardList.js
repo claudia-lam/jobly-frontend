@@ -1,6 +1,5 @@
 import JobCard from "./JobCard";
 
-
 /** List of jobs
  *
  * Props:
@@ -22,6 +21,5 @@ function JobCardList({ jobs }) {
     </div>
   );
 }
-
 
 export default JobCardList;
