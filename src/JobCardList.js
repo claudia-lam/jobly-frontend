@@ -1,10 +1,9 @@
-import JobCard from './JobCard';
-
+import JobCard from "./JobCard";
 
 /** List of jobs
  *
  * Props:
- *  - company: company object
+ *  - jobs: jobs object
  *  {description, handle, jobs:[...], logoUrl, name, numEmployees}
  *
  * State:
@@ -14,11 +13,12 @@ import JobCard from './JobCard';
  */
 function JobCardList({ jobs }) {
   return (
-    <div className='JobCardList'>
-      {jobs.map(j => <JobCard key={j.id} job={j} />)}
+    <div className="JobCardList">
+      {jobs.map((j) => (
+        <JobCard key={j.id} job={j} />
+      ))}
     </div>
   );
 }
-
 
 export default JobCardList;
