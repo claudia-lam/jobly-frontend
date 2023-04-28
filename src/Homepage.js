@@ -1,5 +1,6 @@
 import { useContext } from "react";
-import userContext from './userContext';
+import userContext from "./userContext";
+import { Link } from "react-router-dom";
 
 /** Homepage
  *
@@ -10,15 +11,26 @@ import userContext from './userContext';
  * App --> RoutesList --> Homepage
  */
 function Homepage() {
-  const { firstName } = useContext(userContext);
+  const { firstName, isLoggedIn } = useContext(userContext);
 
   return (
-    <div className='Homepage'>
+    <div className="Homepage">
       <h3>Jobly</h3>
       <p>All the jobs in one, convenient place.</p>
-      <h4>{`Welcome Back, ${firstName}!`}</h4>
+      {!isLoggedIn ? (
+        <div>
+          <Link to="/login">
+            <button>Login</button>
+          </Link>
+          <Link to="/signup">
+            <button>Sign Up</button>
+          </Link>
+        </div>
+      ) : (
+        <h4>{`Welcome Back, ${firstName}!`}</h4>
+      )}
     </div>
-  )
+  );
 }
 
 export default Homepage;

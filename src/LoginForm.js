@@ -1,8 +1,6 @@
 import { useState, useContext } from "react";
-import { useNavigate } from "react-router-dom";
-import Alert from './Alert';
-import userContext from './userContext';
-
+import Alert from "./Alert";
+import userContext from "./userContext";
 
 /**
  * form for logging in user
@@ -20,7 +18,6 @@ import userContext from './userContext';
 function LoginForm({ login, errors }) {
   const [formData, setFormData] = useState({ username: "", password: "" });
 
-  const navigate = useNavigate();
   const { isLoggedIn } = useContext(userContext);
 
   /** Update login */
@@ -39,8 +36,6 @@ function LoginForm({ login, errors }) {
     login(username, password);
     setFormData({ username: "", password: "" });
   }
-
-  if (isLoggedIn) navigate('/');
 
   return (
     <form className="LoginForm" onSubmit={handleSubmit}>

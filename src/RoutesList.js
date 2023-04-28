@@ -16,15 +16,28 @@ import ProfileForm from "./ProfileForm";
  * App --> RoutesList
  *
  */
-function RoutesList({ login, signup, update, user, loginErrors }) {
+function RoutesList({
+  login,
+  signUp,
+  update,
+  user,
+  loginErrors,
+  signUpErrors,
+}) {
   return (
     <Routes>
       <Route path="/" element={<Homepage />} />
       <Route path="/companies" element={<CompanyList />} />
       <Route path="/companies/:company" element={<CompanyDetail />} />
       <Route path="/jobs" element={<JobList />} />
-      <Route path="/login" element={<LoginForm login={login} errors={loginErrors} />} />
-      <Route path="/signup" element={<SignupForm signup={signup} />} />
+      <Route
+        path="/login"
+        element={<LoginForm login={login} errors={loginErrors} />}
+      />
+      <Route
+        path="/signup"
+        element={<SignupForm signUp={signUp} errors={signUpErrors} />}
+      />
       <Route
         path="/profile"
         element={<ProfileForm update={update} user={user} />}

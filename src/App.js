@@ -1,10 +1,10 @@
 import "./App.css";
 import { useEffect, useState } from "react";
-import { BrowserRouter } from "react-router-dom";
+import { BrowserRouter, useNavigate } from "react-router-dom";
 import RoutesList from "./RoutesList";
 import Nav from "./Nav";
 import JoblyApi from "./api";
-import userContext from './userContext';
+import userContext from "./userContext";
 
 /** Controls the entire app
  *
@@ -69,7 +69,9 @@ function App() {
    * throws error if unauthorized
    */
 
-  async function getToken(username, password) {
+  const navigate = useNavigate();
+
+  async function login(username, password) {
     try {
       const token = await JoblyApi.getToken(username, password);
       setToken({
@@ -78,6 +80,7 @@ function App() {
         isLoading: false,
         errors: null,
       });
+      navigate("/");
     } catch (err) {
       setToken({
         token: null,
@@ -87,22 +90,52 @@ function App() {
     }
   }
 
+  async function signUp({ username, password, firstName, lastName, email }) {
+    try {
+      const token = await JoblyApi.getSignupToken(
+        username,
+        password,
+        firstName,
+        lastName,
+        email
+      );
+      setToken({
+        token: token,
+        username: username,
+        isLoading: false,
+        errors: null,
+      });
+      navigate("/");
+    } catch (err) {
+      setToken({
+        token: null,
+        isLoading: false,
+        errors: err,
+      });
+    }
+  }
+
+  console.log("user - IN APP", user);
+
   return (
     <userContext.Provider
       value={{
         isLoggedIn: user.isLoggedIn,
         firstName: user.data?.firstName,
-        userName: user.data?.username
+        userName: user.data?.username,
       }}
     >
       <div className="App">
-        <BrowserRouter>
-          <Nav />
-          <RoutesList login={getToken} loginErrors={token.errors} />
-        </BrowserRouter>
+        <Nav isLoggedIn={user.isLoggedIn} />
+        <RoutesList
+          login={login}
+          user={user}
+          loginErrors={token.errors}
+          signUp={signUp}
+          signUpErrors={token.errors}
+        />
       </div>
     </userContext.Provider>
   );
 }
-
 export default App;
