@@ -1,4 +1,8 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import Alert from './Alert';
+import userContext from './userContext';
+
 
 /**
  * form for logging in user
@@ -13,8 +17,11 @@ import { useState } from "react";
  *
  */
 
-function LoginForm({ login }) {
+function LoginForm({ login, errors }) {
   const [formData, setFormData] = useState({ username: "", password: "" });
+
+  const navigate = useNavigate();
+  const { isLoggedIn } = useContext(userContext);
 
   /** Update login */
   function handleChange(evt) {
@@ -33,7 +40,8 @@ function LoginForm({ login }) {
     setFormData({ username: "", password: "" });
   }
 
-  console.log("formData", formData);
+  if (isLoggedIn) navigate('/');
+
   return (
     <form className="LoginForm" onSubmit={handleSubmit}>
       <label forhtml="username">Username</label>
@@ -50,6 +58,7 @@ function LoginForm({ login }) {
         onChange={handleChange}
         value={formData.password}
       />
+      {errors && <Alert errors={errors} />}
       <button>Log In</button>
     </form>
   );

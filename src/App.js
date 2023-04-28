@@ -4,6 +4,7 @@ import { BrowserRouter } from "react-router-dom";
 import RoutesList from "./RoutesList";
 import Nav from "./Nav";
 import JoblyApi from "./api";
+import userContext from './userContext';
 
 /** Controls the entire app
  *
@@ -18,11 +19,11 @@ import JoblyApi from "./api";
  *  - token:
  *
  * App -> [Nav, RoutesList]
- *
  */
 function App() {
   const [user, setUser] = useState({
     data: null,
+    isLoggedIn: false,
     isLoading: true,
     errors: null,
   });
@@ -41,12 +42,14 @@ function App() {
           const res = await JoblyApi.getUser(token.username);
           setUser({
             data: res.user,
+            isLoggedIn: true,
             isLoading: false,
             errors: null,
           });
         } catch (err) {
           setUser({
             data: null,
+            isLoggedIn: false,
             isLoading: false,
             errors: err,
           });
@@ -85,12 +88,20 @@ function App() {
   }
 
   return (
-    <div className="App">
-      <BrowserRouter>
-        <Nav />
-        <RoutesList login={getToken} />
-      </BrowserRouter>
-    </div>
+    <userContext.Provider
+      value={{
+        isLoggedIn: user.isLoggedIn,
+        firstName: user.data?.firstName,
+        userName: user.data?.username
+      }}
+    >
+      <div className="App">
+        <BrowserRouter>
+          <Nav />
+          <RoutesList login={getToken} loginErrors={token.errors} />
+        </BrowserRouter>
+      </div>
+    </userContext.Provider>
   );
 }
 
