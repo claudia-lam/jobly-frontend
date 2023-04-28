@@ -28,7 +28,8 @@ function LoginForm({ login }) {
   /** Call parent function */
   function handleSubmit(evt) {
     evt.preventDefault();
-    login(formData);
+    const { username, password } = formData;
+    login(username, password);
     setFormData({ username: "", password: "" });
   }
 
@@ -49,6 +50,7 @@ function LoginForm({ login }) {
         onChange={handleChange}
         value={formData.password}
       />
+      <button>Log In</button>
     </form>
   );
 }
