@@ -39,22 +39,24 @@ function LoginForm({ login, errors }) {
 
   return (
     <form className="LoginForm" onSubmit={handleSubmit}>
-      <label forhtml="username">Username</label>
-      <input
-        id="username"
-        name="username"
-        onChange={handleChange}
-        value={formData.username}
-      />
-      <label forhtml="password">password</label>
-      <input
-        id="password"
-        name="password"
-        onChange={handleChange}
-        value={formData.password}
-      />
-      {errors && <Alert errors={errors} />}
-      <button>Log In</button>
+      <div className="container col-md-6 offset-md-3 col-lg-4 offset-lg-4">
+        <label forhtml="username">Username</label>
+        <input
+          id="username"
+          name="username"
+          onChange={handleChange}
+          value={formData.username}
+        />
+        <label forhtml="password">password</label>
+        <input
+          id="password"
+          name="password"
+          onChange={handleChange}
+          value={formData.password}
+        />
+        {errors && <Alert errors={errors} />}
+        <button>Log In</button>
+      </div>
     </form>
   );
 }
