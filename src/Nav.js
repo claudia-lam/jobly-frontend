@@ -1,4 +1,5 @@
 import React from "react";
+import "./Nav.css";
 import { Link } from "react-router-dom";
 
 /** navigation menu
@@ -13,7 +14,7 @@ import { Link } from "react-router-dom";
 function Nav({ isLoggedIn }) {
   // TODO: NavLink better for styling
   return (
-    <div className="Nav">
+    <div className="Nav navbar navbar-expand-md">
       <Link to="/">Jobly</Link>
       {isLoggedIn ? (
         <>
