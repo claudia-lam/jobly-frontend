@@ -16,7 +16,7 @@ function Homepage() {
 
   return (
     <div className="Homepage">
-      <div className="container text-center">
+      <div className="container text-center homepage-container">
         <h3 className="mb-4 fw-bold">Jobly</h3>
         <p className="lead">All the jobs in one, convenient place.</p>
         {!isLoggedIn ? (
