@@ -1,4 +1,5 @@
 import { useContext } from "react";
+import "./Homepage.css";
 import userContext from "./userContext";
 import { Link } from "react-router-dom";
 
@@ -15,20 +16,22 @@ function Homepage() {
 
   return (
     <div className="Homepage">
-      <h3>Jobly</h3>
-      <p>All the jobs in one, convenient place.</p>
-      {!isLoggedIn ? (
-        <div>
-          <Link to="/login">
-            <button>Login</button>
-          </Link>
-          <Link to="/signup">
-            <button>Sign Up</button>
-          </Link>
-        </div>
-      ) : (
-        <h4>{`Welcome Back, ${firstName}!`}</h4>
-      )}
+      <div className="container text-center">
+        <h3 className="mb-4 fw-bold">Jobly</h3>
+        <p className="lead">All the jobs in one, convenient place.</p>
+        {!isLoggedIn ? (
+          <div>
+            <Link className="btn btn-primary fw-bold me-3" to="/login">
+              Login
+            </Link>
+            <Link className="btn btn-primary fw-bold me-3" to="/signup">
+              Sign Up
+            </Link>
+          </div>
+        ) : (
+          <h4>{`Welcome Back, ${firstName}!`}</h4>
+        )}
+      </div>
     </div>
   );
 }
