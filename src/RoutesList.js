@@ -25,25 +25,27 @@ function RoutesList({
   signUpErrors,
 }) {
   return (
-    <Routes>
-      <Route path="/" element={<Homepage />} />
-      <Route path="/companies" element={<CompanyList />} />
-      <Route path="/companies/:company" element={<CompanyDetail />} />
-      <Route path="/jobs" element={<JobList />} />
-      <Route
-        path="/login"
-        element={<LoginForm login={login} errors={loginErrors} />}
-      />
-      <Route
-        path="/signup"
-        element={<SignupForm signUp={signUp} errors={signUpErrors} />}
-      />
-      <Route
-        path="/profile"
-        element={<ProfileForm update={update} user={user} />}
-      />
-      <Route path="*" element={<Navigate to="/" />} />
-    </Routes>
+    <div className="pt-5">
+      <Routes>
+        <Route path="/" element={<Homepage />} />
+        <Route path="/companies" element={<CompanyList />} />
+        <Route path="/companies/:company" element={<CompanyDetail />} />
+        <Route path="/jobs" element={<JobList />} />
+        <Route
+          path="/login"
+          element={<LoginForm login={login} errors={loginErrors} />}
+        />
+        <Route
+          path="/signup"
+          element={<SignupForm signUp={signUp} errors={signUpErrors} />}
+        />
+        <Route
+          path="/profile"
+          element={<ProfileForm update={update} user={user} />}
+        />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    </div>
   );
 }
 
