@@ -25,10 +25,14 @@ function Nav({ isLoggedIn }) {
             <Link to="/">Logout</Link>
           </>
         ) : (
-          <>
-            <Link to="/login">Login</Link>
-            <Link to="/signup">Sign Up</Link>
-          </>
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item me-4">
+              <Link to="/login">Login</Link>
+            </li>
+            <li className="nav-item me-4">
+              <Link to="/signup">Sign Up</Link>
+            </li>
+          </ul>
         )}
       </div>
     </nav>
