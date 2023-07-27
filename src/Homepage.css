@@ -6,3 +6,14 @@
     color: #ffffff;
     text-shadow: 2px 2px 5px rgb(52, 48, 47);
   }
+
+.homepage-container {
+    background-color: black;
+    opacity: 90%;
+    width: 50%;
+}
+
+.container {
+    padding: calc(var(--bs-gutter-x) * 1);
+    border-radius: 10px;
+}
