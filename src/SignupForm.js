@@ -48,7 +48,7 @@ function SignupForm({ signUp, errors }) {
         <div className="card">
           <div className="card-body">
             <div className="mb-3">
-              <label forhtml="username">Username</label>
+              <label className="form-label" forhtml="username">Username</label>
               <input
                 id="username"
                 name="username"
@@ -57,7 +57,7 @@ function SignupForm({ signUp, errors }) {
                 value={formData.username}
               />
               <div className="mb-3">
-                <label forhtml="password">Password</label>
+                <label className="form-label" forhtml="password">Password</label>
                 <input
                   id="password"
                   name="password"
@@ -67,7 +67,7 @@ function SignupForm({ signUp, errors }) {
                 />
               </div>
               <div className="mb-3">
-                <label forhtml="firstName">First Name</label>
+                <label className="form-label" forhtml="firstName">First Name</label>
                 <input
                   id="firstName"
                   name="firstName"
@@ -77,7 +77,7 @@ function SignupForm({ signUp, errors }) {
                 />
               </div>
               <div className="mb-3">
-                <label forhtml="lastName">Last Name</label>
+                <label className="form-label" forhtml="lastName">Last Name</label>
                 <input
                   id="lastName"
                   name="lastName"
@@ -87,7 +87,7 @@ function SignupForm({ signUp, errors }) {
                 />
               </div>
               <div className="mb-3">
-                <label forhtml="email">Email</label>
+                <label className="form-label" forhtml="email">Email</label>
                 <input
                   id="email"
                   name="email"
