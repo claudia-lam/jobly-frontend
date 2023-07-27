@@ -44,19 +44,21 @@ function LoginForm({ login, errors }) {
         <div className="card">
           <div className="card-body">
             <div className="mb-3">
-              <label forhtml="username">Username</label>
+              <label className="form-label" forhtml="username">Username</label>
               <input
                 id="username"
                 name="username"
+                className="form-control"
                 onChange={handleChange}
                 value={formData.username}
               />
             </div>
             <div className="mb-3">
-              <label forhtml="password">Password</label>
+              <label className="form-label" forhtml="password">Password</label>
               <input
                 id="password"
                 name="password"
+                className="form-control"
                 onChange={handleChange}
                 value={formData.password}
               />
