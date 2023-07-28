@@ -91,12 +91,14 @@ function CompanyList() {
   const companiesData = companies.data.companies;
 
   return (
-    <div className="CompanyList">
+    <div className="CompanyList col-md-8 offset-md-2">
       <SearchForm filter={filterCompanies} />
       {!companiesData.length && <p>Sorry, no results were found!</p>}
-      {companiesData.map((c) => {
-        return <CompanyCard company={c} key={c.handle} />; // TODO: be more explicit of what you're passing down as props.
-      })}
+      <div className="CompanyList-list">
+        {companiesData.map((c) => {
+          return <CompanyCard company={c} key={c.handle} />; // TODO: be more explicit of what you're passing down as props.
+        })}
+      </div>
     </div>
   );
 }

@@ -17,8 +17,8 @@ function CompanyCard({ company }) {
   const { name, handle, description, logoUrl } = company;
 
   return (
-    <Link className="CompanyCard-Link" to={`/companies/${handle}`}>
-      <div className="CompanyCard">
+    <Link className="CompanyCard-Link card" to={`/companies/${handle}`}>
+      <div className="CompanyCard card-body">
         {logoUrl && <img src={`.${logoUrl}`} alt={`logo of ${name}`} />}
         <h3>{name}</h3>
         <p>{description}</p>
