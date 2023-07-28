@@ -61,8 +61,8 @@ function CompanyDetail() {
 
   return (
     <div className="CompanyDetail col-md-8 offset-md-2">
-      <h2>{name}</h2>
-      <p>{description}</p>
+      <h4 id="CompanyDetail-title">{name}</h4>
+      <p id="CompanyDetail-title">{description}</p>
       <JobCardList jobs={jobs} />
     </div>
   );
