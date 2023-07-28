@@ -27,15 +27,24 @@ function SearchForm({ filter }) {
   }
 
   return (
-    <form className="SearchForm" onSubmit={handleSubmit}>
-      <input
-        name="search"
-        placeholder="Enter search term"
-        onChange={handleChange}
-        value={searchTerm}
-      />
-      <button>Submit</button>
-    </form>
+    <div className="SearchForm mb-4">
+      <form className="SearchForm" onSubmit={handleSubmit}>
+        <div className="row justify-content-center justify-content-lg-start gx-0">
+          <div className="col-8">
+            <input
+              className="form-control form-control-lg"
+              name="search"
+              placeholder="Enter search term"
+              onChange={handleChange}
+              value={searchTerm}
+            />
+          </div>
+          <div className="col-auto">
+            <button className="btn btn-lg btn-primary">Submit</button>
+          </div>
+        </div>
+      </form>
+    </div>
   );
 }
 
