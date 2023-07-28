@@ -17,10 +17,12 @@ function JobCard({ job }) {
 
   return (
     <div className="JobCard card">
-      <h3>{title}</h3>
-      {companyName && <h4>{companyName}</h4>}
-      <p>Salary: {salary}</p>
-      <p>Equity: {equity}</p>
+      <div className="card-body">
+        <h3>{title}</h3>
+        {companyName && <h4>{companyName}</h4>}
+        <p>Salary: {salary}</p>
+        <p>Equity: {equity}</p>
+      </div>
     </div>
   );
 }
