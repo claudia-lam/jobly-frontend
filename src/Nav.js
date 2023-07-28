@@ -1,6 +1,6 @@
 import React from "react";
 import "./Nav.css";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 
 /** navigation menu
  *
@@ -12,25 +12,32 @@ import { Link } from "react-router-dom";
  *
  */
 function Nav({ isLoggedIn }) {
-  // TODO: NavLink better for styling
   return (
     <nav className="Nav navbar navbar-expand-md">
       <div className="container-fluid">
-        <Link className="navbar-brand" to="/">Jobly</Link>
+        <NavLink className="navbar-brand" to="/">Jobly</NavLink>
         {isLoggedIn ? (
-          <>
-            <Link to="/companies">Companies</Link>
-            <Link to="/jobs">Jobs</Link>
-            <Link to="/profile">Profile</Link>
-            <Link to="/">Logout</Link>
-          </>
+          <ul className="navbar-nav ms-auto">
+            <li className="nav-item me-4">
+              <NavLink to="/companies">Companies</NavLink>
+            </li>
+            <li className="nav-item me-4">
+              <NavLink to="/jobs">Jobs</NavLink>
+            </li>
+            <li className="nav-item me-4">
+              <NavLink to="/profile">Profile</NavLink>
+            </li>
+            <li className="nav-item me-4">
+              <NavLink to="/">Logout</NavLink>
+            </li>
+          </ul>
         ) : (
           <ul className="navbar-nav ms-auto">
             <li className="nav-item me-4">
-              <Link to="/login">Login</Link>
+              <NavLink to="/login">Login</NavLink>
             </li>
             <li className="nav-item me-4">
-              <Link to="/signup">Sign Up</Link>
+              <NavLink to="/signup">Sign Up</NavLink>
             </li>
           </ul>
         )}
