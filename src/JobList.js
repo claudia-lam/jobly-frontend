@@ -81,9 +81,9 @@ function JobList() {
   const allJobs = jobs.data.jobs;
 
   return (
-    <div className="JobList">
+    <div className="JobList col-md-8 offset-md-2">
       <SearchForm filter={getFilteredJobs} />
-      {!allJobs.length && <p>Sorry, no results were found!</p>}
+      {!allJobs.length && <p className="lead">Sorry, no results were found!</p>}
       <JobCardList jobs={allJobs} />
     </div>
   );
