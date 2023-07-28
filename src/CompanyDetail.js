@@ -60,7 +60,7 @@ function CompanyDetail() {
   const { name, description, jobs } = companyData.data;
 
   return (
-    <div className="CompanyDetail">
+    <div className="CompanyDetail col-md-8 offset-md-2">
       <h2>{name}</h2>
       <p>{description}</p>
       <JobCardList jobs={jobs} />
