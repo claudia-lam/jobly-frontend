@@ -16,7 +16,7 @@ function JobCard({ job }) {
   const { title, salary, equity, companyName } = job;
 
   return (
-    <div className="JobCard">
+    <div className="JobCard card">
       <h3>{title}</h3>
       {companyName && <h4>{companyName}</h4>}
       <p>Salary: {salary}</p>
